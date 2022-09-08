@@ -5,8 +5,6 @@ const express = require('express');
 const createError = require('http-errors');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-const { log } = console;
 
 // import routes
 const { weatherRouter } = require('./routes');
@@ -33,6 +31,4 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
-  log(`Server listening on port: ${PORT}`);
-});
+module.exports = app;

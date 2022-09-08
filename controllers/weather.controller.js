@@ -2,7 +2,10 @@
 const service = require('../services/weather.service');
 
 const getWeather = async (lat, lng) => {
-  if (Number.isNaN(lat) || Number.isNaN(lng)) {
+  const latitude = Number(lat);
+  const longitude = Number(lng);
+
+  if (Number.isNaN(latitude) || Number.isNaN(longitude)) {
     return {
       success: false,
       message: 'Incorrect latitude or longitude',
