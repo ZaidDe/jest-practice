@@ -7,6 +7,10 @@ jest.mock('axios');
 
 describe('Testing Weather Service', () => {
   describe('GetWeather Method', () => {
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
     it('should return success:true and data when API responds correctly', async () => {
       const response = {
         success: true,
@@ -37,6 +41,14 @@ describe('Testing Weather Service', () => {
 
       expect(result.success).toBe(false);
       expect(result.data).toBe(null);
+    });
+
+    it('should call external API only once', async () => {
+      const response = { };
+
+      axios.get.mockImplementation(() => Promise.resolve(response));
+      await getWeather(33.251, 73.214);
+      expect(axios.get.mock.calls).toHaveLength(1);
     });
   });
 });
